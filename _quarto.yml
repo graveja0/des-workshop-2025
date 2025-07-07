@@ -13,18 +13,12 @@ project:
 
 website:
   title: "Discrete Event Simulation for Health Economic Evaluation"
-  sidebar:
-    style: "floating"
+  navbar:
     search: false
-    collapse-level: 1
-    contents:
-      - href: index.qmd
-        text: Home
 
 format:
   html:
     theme: cosmo
-    css: styles.css
     toc: true
     
 execute:
