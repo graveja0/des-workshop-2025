@@ -103,9 +103,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <meta cr-debug-mode="false">
 <meta cr-remove-header-space="false">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="_extensions/qmd-lab/closeread/closeread.css">
 <link rel="stylesheet" href="des-styling.css">
@@ -202,24 +233,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Later we’ll build in some accounting of costs and quality of life, so we include cost and QALY parameters in the inputs as well.</p>
 </div>
 </div>
+<div class="trigger new-trigger" data-highlight="18" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>We’ll also cover point and interval discounting when we come to outcome estimation.</p>
+</div>
+</div>
 <div class="trigger new-trigger" data-highlight="1-6" data-focus-on="cr-initialize">
 <div class="narrative">
 <p>Let’s add the sick state to the counters.</p>
 </div>
 </div>
+<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-initialize">
+<div class="narrative">
+<p>Note that we index sick with a value of 1. That’s because <strong>simmer</strong> requires that health states be tracked using a numeric categorical variable that starts with zero.</p>
+</div>
+</div>
 <div class="trigger new-trigger" data-highlight="8-16" data-focus-on="cr-initialize">
 <div class="narrative">
-<p>We must also be careful about how we initilize our patients.</p>
+<p>We next add code initilise all patients into the healthy state.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-highlight="14" data-focus-on="cr-initialize">
 <div class="narrative">
-<p>In the example model, patients start off healthy. We’ll then define a numeric <span style="color:dodgerblue">state</span> variable–<strong>simmer</strong> requires this, and requires that 0 is the first value. So when <code>state==0</code>, the patient is in the <strong>healthy</strong> state.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-highlight="14" data-focus-on="cr-initialize">
-<div class="narrative">
-<p>The full model will also include a <strong>sicker</strong> health state, so we will assign a value of 1 for the <strong>sick</strong> state.</p>
+<p>We do this be setting the <code>state</code> attribute value to zero upon inilialisation of the patient.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-highlight="15" data-focus-on="cr-initialize">
@@ -234,32 +270,172 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-sickevent2">
 <div class="narrative">
-<p>TK</p>
+<p>The function that draws years till sick uses a draw from the exponential distribution, and only sets a value within the simulation time horizon if the patient is in the <strong>healthy</strong> state.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-sickevent2b">
 <div class="narrative">
-<p>TK</p>
+<p>Once the patient transitions into the <strong>sick</strong> state, we reset her state attribute to a value of 1 (i.e., sick).</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="5,6" data-focus-on="cr-sickevent2b">
+<div class="narrative">
+<p>She also releases the <code>healthy</code> resource and seizes the <code>sick</code> resouce. Again, this facilitates tracking total amount of time in each health state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-pan-to="90%, 60%" data-scale-by="2.8" data-focus-on="cr-petrisick">
+<div class="narrative">
+<p>Recall that in this model, patients can recover and become healthy again.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-healthy2">
 <div class="narrative">
-
+<p>To allow for this, we need to define a function for <strong>time to healthy</strong> and a function that releases the <strong>sick</strong> resource and re-seizes <strong>healthy</strong>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-cleanup2">
 <div class="narrative">
-<p>TK</p>
+<p>We need to also amend our <strong>cleanup</strong> function so that it releases the <strong>healthy</strong> resource (if healthy) and <strong>sick</strong> resource (if sick) at the termination of the model.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-registry2">
 <div class="narrative">
-<p>TK</p>
+<p>Finally, we amend our <strong>event registry</strong> so that our model output records events for becoming ill and healthy.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-Rmodel2resultrun">
+<div class="narrative">
+<p>Our <code>des_run()</code> function does not need to be amended because we took care of all the changes in the other model functions.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-Rmodel2result">
 <div class="narrative">
-<p>As the table demonstrates, three of the four simulated patients died before the model horizon was reached.</p>
+<p>This table (from the <code>res_model</code> object) shows a partial trajectory for a single patient. We can see that the patient bounces back and forth between the <strong>healthy</strong> and <strong>sick</strong> health states.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-Rmodel2result">
+<div class="narrative">
+<p>With the simple Healthy-Sick-Dead model built, let’s now turn to outcome estimation.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="11-15" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>Recall that earlier, we included cost and utility weights in the inputs.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="12-13" data-focus-on="cr-desrun2">
+<div class="narrative">
+<p>Outcome estimation takes place after the model has run all patients. We do it by simply calculating and adding <strong>cost</strong> and <strong>QALY</strong> columns to the model output.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-desrun2">
+<div class="narrative">
+<p>We’ll now define two functions, <code>cost_arrivals()</code> and <code>qaly_arrivals()</code> that take care of this process.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="12-13" data-focus-on="cr-desrun2">
+<div class="narrative">
+<p>These functions will be tucked into the very end of the <code>des_run()</code> function we defined that runs the simulation model.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>The function <code>cost_arrivals()</code> takes as its inputs the trajectory (“arrivals”) as well as the model inputs, which contains information on costs, utility weights, etc.</p>
+</div>
+</div>
+<div class="trigger" data-messages="false">
+<div class="cell narrative">
+
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-costarrivalsresulth2">
+<div class="narrative">
+<p>The table here shows partial trajectory (“arrivals”) information for a single patient; we saw this patient’s trajetory a bit earlier.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="3" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>Let’s focus first on undiscounted costs, which start off as zero.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="6" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>We first select all time periods where the patient is in the <strong>healthy</strong> state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="7-8" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>We next apply the cost parameter to the total time spent in the <strong>healthy</strong> state, which is <code>end_time</code> - <code>start_time</code></p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-costarrivalsresulth2b">
+<div class="narrative">
+<p>The table shows the net result. The selected rows are highlighted in green, and we can see that the cost for each interval as been calculated.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="12-14" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>We repeat the same process for the <strong>sick</strong> health state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="12-14" data-focus-on="cr-costarrivalsresults2">
+<div class="narrative">
+<p>We repeat the same process for the <strong>sick</strong> health state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-costarrivalsresults2c">
+<div class="narrative">
+<p>One nice feature of the DES trajectory is that it is easy to assign one-time costs.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-costarrivalsresults2c">
+<div class="narrative">
+<p>For example, suppose there is a one-time cost of end-of-life care. We could simply add this at the time of death.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="4,9,10,11,16,17,18" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>Let’s now discuss discounting in DES model outputs.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-discount">
+<div class="narrative">
+<p>We have created a helper function <code>discount_value()</code> that takes care of continuous-time discounting for you.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-discount">
+<div class="narrative">
+<p>Many approaches use the power definition of discounting, which in R utilises “^” operator. This limits the numerical stable range of the function.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-discount">
+<div class="narrative">
+<p>Our function uses the exponential formulation with a greater numerical stability. The function also does point discounting or time period (i.e., integrated area) discounting.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-discountex">
+<div class="narrative">
+<p>For example, suppose we want to discount the value of 1, which occurs at <em>precisely</em> one year in the future. For example, this could be a one-time treatment cost.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-discountex2">
+<div class="narrative">
+<p>Now suppose we want to discount the value 1 over the time period <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=1\)</span>. For example, this type of discounting would apply for time spent in a health state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="9,10,11,16,17,18" data-focus-on="cr-costarrivals2">
+<div class="narrative">
+<p>Our cost calculation approach applies the <code>discount_value()</code> function to all time periods to calculate discounted costs.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-qalyarrivals2">
+<div class="narrative">
+<p>We define a similar <code>qaly_arrivals()</code> function to calculate quality of life based on utility weights.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="8,17" data-focus-on="cr-qalyarrivals2">
+<div class="narrative">
+<p>The only major difference is that we multiply time in each health state with its corresponding utility weight.</p>
 </div>
 </div>
 </div>
@@ -288,8 +464,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">c.S1   =</span>  <span class="dv">4000</span>,      <span class="co"># Sick individuals in S1</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a>    </span>
 <span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">u.H    =</span>     <span class="fl">1.00</span>,   <span class="co"># Healthy</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">u.S1   =</span>     <span class="fl">0.80</span>   <span class="co"># S1</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">u.S1   =</span>     <span class="fl">0.80</span>,   <span class="co"># S1</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    </span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="co"># Cycle =&gt; 1 year</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">d.r    =</span>     <span class="fl">0.03</span>   <span class="co"># Discount Rate</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="cr-initialize" class="sticky">
@@ -414,184 +593,484 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-22"><a href="#cb8-22"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div id="cr-Rmodel2resultrun" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>des_run <span class="ot">&lt;-</span> <span class="cf">function</span>(inputs)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>{</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  env  <span class="ot">&lt;&lt;-</span> <span class="fu">simmer</span>(<span class="st">"SickSicker"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  traj <span class="ot">&lt;-</span> <span class="fu">des</span>(env, inputs)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  env <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="fu">create_counters</span>(counters) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="fu">add_generator</span>(<span class="st">"patient"</span>, traj, <span class="fu">at</span>(<span class="fu">rep</span>(<span class="dv">0</span>, inputs<span class="sc">$</span>N)), <span class="at">mon=</span><span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="fu">run</span>(inputs<span class="sc">$</span>horizon<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">365</span>) <span class="sc">|&gt;</span> <span class="co"># Simulate just past horizon (in years)</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="fu">wrap</span>()</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        </span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="fu">get_mon_arrivals</span>(env, <span class="at">per_resource =</span> T) </span>
+<span id="cb9-12"><a href="#cb9-12"></a>}</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-15"><a href="#cb9-15"></a>res_model <span class="ot">&lt;-</span> <span class="fu">des_run</span>(inputs) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 <div id="cr-Rmodel2result" class="sticky">
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 15%">
-<col style="width: 14%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 17%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">name</th>
-<th style="text-align: right;">start_time</th>
-<th style="text-align: right;">end_time</th>
-<th style="text-align: right;">activity_time</th>
+<th style="text-align: left;">start_time</th>
+<th style="text-align: left;">end_time</th>
+<th style="text-align: left;">activity_time</th>
 <th style="text-align: left;">resource</th>
-<th style="text-align: right;">replication</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">patient2</td>
-<td style="text-align: right;">0.00000</td>
-<td style="text-align: right;">11.99166</td>
-<td style="text-align: right;">11.9916559</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">11.99</td>
 <td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">patient2</td>
-<td style="text-align: right;">0.00000</td>
-<td style="text-align: right;">106.01841</td>
-<td style="text-align: right;">106.0184096</td>
-<td style="text-align: left;">time_in_model</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">11.99166</td>
-<td style="text-align: right;">13.78181</td>
-<td style="text-align: right;">1.7901505</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">1.79</td>
 <td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">13.78181</td>
-<td style="text-align: right;">20.41218</td>
-<td style="text-align: right;">6.6303719</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">patient2</td>
-<td style="text-align: right;">20.41218</td>
-<td style="text-align: right;">22.65787</td>
-<td style="text-align: right;">2.2456955</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">20.41</td>
+<td style="text-align: left;">6.63</td>
+<td style="text-align: left;">healthy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.8</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">0.07175</td>
 <td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">patient2</td>
-<td style="text-align: right;">22.65787</td>
-<td style="text-align: right;">25.53209</td>
-<td style="text-align: right;">2.8742142</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">15.15</td>
 <td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">patient2</td>
-<td style="text-align: right;">25.53209</td>
-<td style="text-align: right;">29.47386</td>
-<td style="text-align: right;">3.9417768</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">29.47386</td>
-<td style="text-align: right;">43.47638</td>
-<td style="text-align: right;">14.0025149</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">43.47638</td>
-<td style="text-align: right;">43.73148</td>
-<td style="text-align: right;">0.2550992</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">43.73148</td>
-<td style="text-align: right;">52.82863</td>
-<td style="text-align: right;">9.0971481</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">52.82863</td>
-<td style="text-align: right;">53.17266</td>
-<td style="text-align: right;">0.3440287</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">53.17266</td>
-<td style="text-align: right;">72.16040</td>
-<td style="text-align: right;">18.9877470</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">72.16040</td>
-<td style="text-align: right;">73.30579</td>
-<td style="text-align: right;">1.1453902</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">73.30579</td>
-<td style="text-align: right;">81.50821</td>
-<td style="text-align: right;">8.2024183</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">81.50821</td>
-<td style="text-align: right;">83.47108</td>
-<td style="text-align: right;">1.9628725</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">83.47108</td>
-<td style="text-align: right;">90.80069</td>
-<td style="text-align: right;">7.3296055</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">90.80069</td>
-<td style="text-align: right;">90.87244</td>
-<td style="text-align: right;">0.0717513</td>
-<td style="text-align: left;">sick1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">90.87244</td>
-<td style="text-align: right;">106.01841</td>
-<td style="text-align: right;">15.1459691</td>
-<td style="text-align: left;">healthy</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">patient2</td>
-<td style="text-align: right;">106.01841</td>
-<td style="text-align: right;">106.01841</td>
-<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">0</td>
 <td style="text-align: left;">death</td>
-<td style="text-align: right;">1</td>
 </tr>
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<div id="cr-desrun2" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>des_run <span class="ot">&lt;-</span> <span class="cf">function</span>(inputs)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>{</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  env  <span class="ot">&lt;&lt;-</span> <span class="fu">simmer</span>(<span class="st">"SickSicker"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  traj <span class="ot">&lt;-</span> <span class="fu">des</span>(env, inputs)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  env <span class="sc">|&gt;</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="fu">create_counters</span>(counters) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="fu">add_generator</span>(<span class="st">"patient"</span>, traj, <span class="fu">at</span>(<span class="fu">rep</span>(<span class="dv">0</span>, inputs<span class="sc">$</span>N)), <span class="at">mon=</span><span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="fu">run</span>(inputs<span class="sc">$</span>horizon<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">365</span>) <span class="sc">|&gt;</span> <span class="co"># Simulate just past horizon (in years)</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="fu">wrap</span>()</span>
+<span id="cb10-10"><a href="#cb10-10"></a>        </span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="fu">get_mon_arrivals</span>(env, <span class="at">per_resource =</span> T) <span class="sc">|&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>    <span class="fu">cost_arrivals</span>(inputs) <span class="sc">|&gt;</span> </span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="fu">qaly_arrivals</span>(inputs) </span>
+<span id="cb10-14"><a href="#cb10-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cr-costarrivals2" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>cost_arrivals <span class="ot">&lt;-</span> <span class="cf">function</span>(arrivals, inputs)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>{</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  arrivals<span class="sc">$</span>cost  <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># Undiscounted costs are 0 to begin</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  arrivals<span class="sc">$</span>dcost <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># Discounted costs are 0 to begin</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  </span>
+<span id="cb11-6"><a href="#cb11-6"></a>  selector <span class="ot">=</span> arrivals<span class="sc">$</span>resource <span class="sc">==</span> <span class="st">'healthy'</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  arrivals<span class="sc">$</span>cost[selector] <span class="ot">&lt;-</span> inputs<span class="sc">$</span>c.H <span class="sc">*</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    (arrivals<span class="sc">$</span>end_time[selector] <span class="sc">-</span> arrivals<span class="sc">$</span>start_time[selector])</span>
+<span id="cb11-9"><a href="#cb11-9"></a>  arrivals<span class="sc">$</span>dcost[selector] <span class="ot">&lt;-</span> <span class="fu">discount_value</span>(inputs<span class="sc">$</span>c.H,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>    arrivals<span class="sc">$</span>start_time[selector], arrivals<span class="sc">$</span>end_time[selector],</span>
+<span id="cb11-11"><a href="#cb11-11"></a>    <span class="at">annual_rate =</span> inputs<span class="sc">$</span>d.r)</span>
+<span id="cb11-12"><a href="#cb11-12"></a>  </span>
+<span id="cb11-13"><a href="#cb11-13"></a>  selector <span class="ot">=</span> arrivals<span class="sc">$</span>resource <span class="sc">==</span> <span class="st">'sick1'</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>  arrivals<span class="sc">$</span>cost[selector] <span class="ot">&lt;-</span> inputs<span class="sc">$</span>c.S1 <span class="sc">*</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>    (arrivals<span class="sc">$</span>end_time[selector] <span class="sc">-</span> arrivals<span class="sc">$</span>start_time[selector])</span>
+<span id="cb11-16"><a href="#cb11-16"></a>  arrivals<span class="sc">$</span>dcost[selector] <span class="ot">&lt;-</span> <span class="fu">discount_value</span>(inputs<span class="sc">$</span>c.S1,</span>
+<span id="cb11-17"><a href="#cb11-17"></a>    arrivals<span class="sc">$</span>start_time[selector], arrivals<span class="sc">$</span>end_time[selector],</span>
+<span id="cb11-18"><a href="#cb11-18"></a>    <span class="at">annual_rate =</span> inputs<span class="sc">$</span>d.r)</span>
+<span id="cb11-19"><a href="#cb11-19"></a> </span>
+<span id="cb11-20"><a href="#cb11-20"></a>  arrivals</span>
+<span id="cb11-21"><a href="#cb11-21"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cr-costarrivalsresulth2" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">start_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">end_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">resource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">healthy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">sick1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">20.41</td>
+<td style="text-align: left;">healthy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.8</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">sick1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">healthy</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">death</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div id="cr-costarrivalsresulth2b" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">start_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">end_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">resource</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">0</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">11.99</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">healthy</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">23980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">sick1</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">13.78</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">20.41</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">healthy</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">13260</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.8</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">sick1</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">90.87</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">106</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">healthy</td>
+<td style="text-align: left; font-weight: bold; background-color: lightgreen !important;">30290</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">death</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div id="cr-costarrivalsresults2" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">start_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">end_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">resource</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">23980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">11.99</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">13.78</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">sick1</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">3580</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">20.41</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">13260</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">90.8</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">90.87</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">sick1</td>
+<td style="text-align: left; font-weight: bold; background-color: lightpink !important;">143.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">30290</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">death</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div id="cr-costarrivalsresults2c" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">start_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">end_time</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">resource</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">23980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">11.99</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">sick1</td>
+<td style="text-align: left;">3580</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">13.78</td>
+<td style="text-align: left;">20.41</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">13260</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.8</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">sick1</td>
+<td style="text-align: left;">143.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">patient2</td>
+<td style="text-align: left;">90.87</td>
+<td style="text-align: left;">106</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">30290</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-weight: bold; background-color: lightblue !important;">patient2</td>
+<td style="text-align: left; font-weight: bold; background-color: lightblue !important;">106</td>
+<td style="text-align: left; font-weight: bold; background-color: lightblue !important;">106</td>
+<td style="text-align: left; font-weight: bold; background-color: lightblue !important;">death</td>
+<td style="text-align: left; font-weight: bold; background-color: lightblue !important;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<div id="cr-discount" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>discount_value <span class="ot">&lt;-</span> <span class="cf">function</span>(value, t_A, <span class="at">t_B=</span><span class="cn">NULL</span>, <span class="at">annual_rate=</span><span class="fl">0.03</span>, <span class="at">scale=</span><span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>{</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="co"># Scale to time step</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="cf">if</span>(scale <span class="sc">!=</span> <span class="dv">1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  {</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    t_A <span class="ot">&lt;-</span> t_A <span class="sc">/</span> scale</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(t_B)) t_B <span class="ot">&lt;-</span> t_B <span class="sc">/</span> scale</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  }</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  </span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="co"># Convert discount to continuous exponential rate</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  r <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>annual_rate) </span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(t_B))</span>
+<span id="cb12-14"><a href="#cb12-14"></a>  { <span class="co"># Point estimate at t_B</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>    value<span class="sc">*</span><span class="fu">exp</span>(r<span class="sc">*</span>t_A)</span>
+<span id="cb12-16"><a href="#cb12-16"></a>  } <span class="cf">else</span> </span>
+<span id="cb12-17"><a href="#cb12-17"></a>  { <span class="co"># Analytic integral of curve</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>    (value<span class="sc">/</span>r)<span class="sc">*</span>(<span class="fu">exp</span>(r<span class="sc">*</span>t_B)<span class="sc">-</span><span class="fu">exp</span>(r<span class="sc">*</span>t_A))</span>
+<span id="cb12-19"><a href="#cb12-19"></a>  }</span>
+<span id="cb12-20"><a href="#cb12-20"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cr-discountex" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">discount_value</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="dv">1</span>, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t_A =</span> <span class="dv">1</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">annual_rate =</span> <span class="fl">0.03</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9708738</code></pre>
+</div>
+</div>
+</div>
+<div id="cr-discountex2" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">discount_value</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="dv">1</span>, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">t_A =</span> <span class="dv">0</span>, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">t_B =</span> <span class="dv">1</span>, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">annual_rate =</span> <span class="fl">0.03</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9853651</code></pre>
+</div>
+</div>
+</div>
+<div id="cr-qalyarrivals2" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>qaly_arrivals <span class="ot">&lt;-</span> <span class="cf">function</span>(arrivals, inputs)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>{</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  arrivals<span class="sc">$</span>qaly  <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># No qaly yet</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  arrivals<span class="sc">$</span>dqaly <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># No discounted qaly either</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>  </span>
+<span id="cb17-6"><a href="#cb17-6"></a>  selector <span class="ot">&lt;-</span> arrivals<span class="sc">$</span>resource <span class="sc">==</span> <span class="st">'healthy'</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>  arrivals<span class="sc">$</span>qaly[selector] <span class="ot">&lt;-</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>    inputs<span class="sc">$</span>u.H<span class="sc">*</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>     (arrivals<span class="sc">$</span>end_time[selector] <span class="sc">-</span> arrivals<span class="sc">$</span>start_time[selector])</span>
+<span id="cb17-10"><a href="#cb17-10"></a>  arrivals<span class="sc">$</span>dqaly[selector] <span class="ot">&lt;-</span> </span>
+<span id="cb17-11"><a href="#cb17-11"></a>      <span class="fu">discount_value</span>(inputs<span class="sc">$</span>u.H, </span>
+<span id="cb17-12"><a href="#cb17-12"></a>                     arrivals<span class="sc">$</span>start_time[selector],</span>
+<span id="cb17-13"><a href="#cb17-13"></a>                     arrivals<span class="sc">$</span>end_time[selector],<span class="at">annual_rate =</span> inputs<span class="sc">$</span>d.r)</span>
+<span id="cb17-14"><a href="#cb17-14"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15"></a>  selector <span class="ot">&lt;-</span> arrivals<span class="sc">$</span>resource <span class="sc">==</span> <span class="st">'sick1'</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>  arrivals<span class="sc">$</span>qaly[selector] <span class="ot">&lt;-</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>    inputs<span class="sc">$</span>u.S1<span class="sc">*</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a>     (arrivals<span class="sc">$</span>end_time[selector] <span class="sc">-</span> arrivals<span class="sc">$</span>start_time[selector])</span>
+<span id="cb17-19"><a href="#cb17-19"></a>  arrivals<span class="sc">$</span>dqaly[selector] <span class="ot">&lt;-</span> </span>
+<span id="cb17-20"><a href="#cb17-20"></a>      <span class="fu">discount_value</span>(inputs<span class="sc">$</span>u.S1, </span>
+<span id="cb17-21"><a href="#cb17-21"></a>                     arrivals<span class="sc">$</span>start_time[selector],</span>
+<span id="cb17-22"><a href="#cb17-22"></a>                     arrivals<span class="sc">$</span>end_time[selector],<span class="at">annual_rate =</span> inputs<span class="sc">$</span>d.r)</span>
+<span id="cb17-23"><a href="#cb17-23"></a>  </span>
+<span id="cb17-24"><a href="#cb17-24"></a>  arrivals</span>
+<span id="cb17-25"><a href="#cb17-25"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
