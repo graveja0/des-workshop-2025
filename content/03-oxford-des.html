@@ -327,27 +327,27 @@ window.Quarto = {
 <div class="narrative-col">
 <div class="trigger new-trigger" data-focus-on="cr-model1_2">
 <div class="narrative">
-<p>We next need to step back and think about two concepts we defined earlier: <span style="color:#79AF97FF"><strong>resources</strong></span> and <span style="color:#00A1D5FF"><strong>events</strong></span>.</p>
+<p>We next need to step back and think about two concepts we defined earlier: <span style="color:#79AF97FF"><strong>resources</strong></span> and <span style="color:#B24745FF"><strong>events</strong></span>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1_2">
 <div class="narrative">
-<p>Let’s think first about <span style="color:#9FA8DA"><strong>resources</strong></span>.</p>
+<p>Let’s think first about <span style="color:#79AF97FF"><strong>resources</strong></span>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1_2">
 <div class="narrative">
-<p>Resources are elements that a patient may use or consume during their time in the simulation.</p>
+<p>are elements that a patient may use or consume during their time in the simulation.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1_2">
 <div class="narrative">
-<p>We use the terms <span style="color:dodgerblue">“use”</span> and <span style="color:dodgerblue">“consume”</span> somewhat loosely here, because a resource could be something like a hospital bed that is needed for treatment—or it could simply be an element like time that is not constrained.</p>
+<p>We use the terms <strong>“use”</strong> and <strong>“consume”</strong> somewhat loosely here, because a resource could be something like a hospital bed that is needed for treatment—or it could simply be an element like time that is not constrained.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1_2">
 <div class="narrative">
-<p>In this very simple model, we need to conceptualize our first resource, which is <span style="color:#9FA8DA"><strong>time in model</strong></span>.</p>
+<p>In this very simple model, we need to conceptualize our first resource, which is <span style="color:#79AF97FF"><strong>time in model</strong></span>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1-resources0">
@@ -357,7 +357,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1-resources1">
 <div class="narrative">
-<p>We can therefore define a resource called <span style="color:#9FA8DA"><strong>time in model</strong></span> that we track. In this case, it will trivially be 30 years for every simulated patient.</p>
+<p>We can therefore define a resource called <span style="color:#79AF97FF"><strong>time in model</strong></span> that we track. In this case, it will trivially be 30 years for every simulated patient.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1-resources1-death">
@@ -377,7 +377,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1-resources2">
 <div class="narrative">
-<p>The way DES conceptualizes this idea is that the resource is “seized” upon initiation of the model, and then “released” upon exit from the model. These two time stamps can then be used to calculate the total time the resource was “used.”</p>
+<p>The way DES conceptualizes this idea is that the <span style="color:#79AF97FF">resource</span> is “seized” upon initiation of the model, and then “released” upon exit from the model. These two time stamps can then be used to calculate the total time the resource was “used.”</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-model1-resources2">
@@ -387,7 +387,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-countertable0">
 <div class="narrative">
-<p>Resources are tracked in a <strong>counter</strong> object. In this very simple model, we only have a single resource to track: <code>time_in_model</code>.</p>
+<p>Resources are tracked in a <code>counter</code> object. In this very simple model, we only have a single resource to track: <code>time_in_model</code>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-counter0">
@@ -432,7 +432,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-highlight="1" data-focus-on="cr-Rinitialize1">
 <div class="narrative">
-<p><code>initialize_patient</code> is a function of both <strong>inputs</strong> (i.e., the parameters governing the model) and <strong>trajectories</strong>.</p>
+<p><code>initialize_patient</code> is a function of both <strong>inputs</strong> (i.e., the parameters governing the model) and <span style="color:#B24745FF"><strong>trajectories</strong></span>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Rinitialize1">
@@ -561,7 +561,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-Rcleanup0Branches">
 <div class="narrative">
-<p>will also be key for how we conceptualize and model resource constraints later on.</p>
+<p>Branches will also be key for how we conceptualize and model resource constraints later on.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-highlight="7" data-focus-on="cr-Rcleanup0">
@@ -586,7 +586,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-Reventreg">
 <div class="narrative">
-<p>Eventually, once the model is run, we want to return an <strong>Event Registry</strong> which records all relevant events and when they happened. In this case, the only event of interest is a transition out of the model once the time horizon has been reached.</p>
+<p>Eventually, once the model is run, we want to return an <span style="color:#F44336"><strong>Event Registry</strong></span> which records all relevant events and when they happened. In this case, the only event of interest is a transition out of the model once the time horizon has been reached.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-highlight="3" data-focus-on="cr-Reventreg">
@@ -671,7 +671,7 @@ window.Quarto = {
 </div>
 <div class="trigger new-trigger" data-scale-by="2.5" data-pan-to="50%,50%" data-focus-on="cr-model2">
 <div class="narrative">
-<p>From the healthy state we now have a <span style="color:#00A1D5FF">*transition**</span></p>
+<p>From the healthy state we now have a <span style="color:#00A1D5FF"><strong>transition</strong></span></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-counter1">
