@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-07-01">
 
-<title>Discrete Event Simulation Modeling with Queues and Resource Constraints: An Introduction – Discrete Event Simulation for Health Economic Evaluation</title>
+<title>Part 5. Implementing Strategies and Summarising Outputs – Discrete Event Simulation for Health Economic Evaluation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,25 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/intersection-observer-polyfill-1.0.0/intersection-observer.js"></script>
+<script src="../site_libs/quarto-contrib/scrollama-3.2.0/scrollama.min.js"></script>
+<script src="../site_libs/quarto-contrib/closeread-0.1.0/closeread.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,8 +103,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta cr-debug-mode="false">
+<meta cr-remove-header-space="false">
 
 
+<link rel="stylesheet" href="_extensions/qmd-lab/closeread/closeread.css">
+<link rel="stylesheet" href="des-styling.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Discrete Event Simulation for Health Economic Evaluation</span>
     </a>
   </div>
@@ -89,44 +129,23 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#workshop-website-httpsgraveja0.github.iodes-workshop-2025" id="toc-workshop-website-httpsgraveja0.github.iodes-workshop-2025" class="nav-link active" data-scroll-target="#workshop-website-httpsgraveja0.github.iodes-workshop-2025">Workshop Website: https://graveja0.github.io/des-workshop-2025/</a></li>
-  <li><a href="#model-diagram-for-the-example-progressive-disease-model" id="toc-model-diagram-for-the-example-progressive-disease-model" class="nav-link" data-scroll-target="#model-diagram-for-the-example-progressive-disease-model">Model Diagram for the Example Progressive Disease Model</a></li>
-  <li><a href="#posit.cloud-modelling-workspace" id="toc-posit.cloud-modelling-workspace" class="nav-link" data-scroll-target="#posit.cloud-modelling-workspace">Posit.Cloud Modelling Workspace</a></li>
-  <li><a href="#part-1-overview-of-des" id="toc-part-1-overview-of-des" class="nav-link" data-scroll-target="#part-1-overview-of-des">Part 1: Overview of DES</a></li>
-  <li><a href="#part-2-conceptual-and-computational-issues" id="toc-part-2-conceptual-and-computational-issues" class="nav-link" data-scroll-target="#part-2-conceptual-and-computational-issues">Part 2: Conceptual and Computational Issues</a></li>
-  <li><a href="#part-3-alive-dead-des" id="toc-part-3-alive-dead-des" class="nav-link" data-scroll-target="#part-3-alive-dead-des">Part 3: Alive-Dead DES</a></li>
-  <li><a href="#part-4-alive-sick-dead-des" id="toc-part-4-alive-sick-dead-des" class="nav-link" data-scroll-target="#part-4-alive-sick-dead-des">Part 4: Alive-Sick Dead DES</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Discrete Event Simulation Modeling with Queues and Resource Constraints: An Introduction</h1>
-<p class="subtitle lead">University of Oxford HERC</p>
+<h1 class="title">Part 5. Implementing Strategies and Summarising Outputs</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 1, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -136,38 +155,45 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="workshop-website-httpsgraveja0.github.iodes-workshop-2025" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-website-httpsgraveja0.github.iodes-workshop-2025">Workshop Website: https://graveja0.github.io/des-workshop-2025/</h3>
-<div class=".column-page">
-<p><img src="images/clipboard-303483158.png" class="img-fluid"></p>
+<div class="cr-section cr-column-screen sidebar-left">
+<div class="narrative-col">
+<div class="trigger new-trigger" data-focus-on="cr-petri">
+<div class="narrative">
+<p>This section of the tutorial will demonstrate how to implement different treatment strategies and summarise outcomes in a DES model.</p>
 </div>
-<p>This mini-workshop will introduce participants to discrete event simulation (DES) as a tool for policy evaluation and health technology assessment. Participants will be introduced to key concepts for conceptualising and visualising DES models, and will be led through a progressive disease DES that replicates results from a widely-used didactic model. Additional topics will include computational issues and considerations, and a comparison of DES with other modelling frameworks including discrete time Markov cohort and microsimulation modelling. We will round out our time together by discussing novel extensions of DES into concepts that are difficult if not impossible to capture in other health economic modelling environments, including resource contention and other interactions amongst patients, capacity constraints, and treatment queues and wait times.</p>
-<p><a href="images/about-vchem.pdf">Read more about the Vanderbilt Center for Health Economic Modeling</a></p>
-</section>
-<section id="model-diagram-for-the-example-progressive-disease-model" class="level2">
-<h2 class="anchored" data-anchor-id="model-diagram-for-the-example-progressive-disease-model">Model Diagram for the Example Progressive Disease Model</h2>
-<div class="screen-page">
-<p><img src="content/images/petri-model6.png" class="img-fluid"></p>
 </div>
-</section>
-<section id="posit.cloud-modelling-workspace" class="level2">
-<h2 class="anchored" data-anchor-id="posit.cloud-modelling-workspace"><a href="https://posit.cloud/content/10570508">Posit.Cloud Modelling Workspace</a></h2>
-<p>All models discussed today are provided alongside a fully functional R workspace on posit.cloud. <a href="https://posit.cloud/content/10570508">Please follow this link to access</a>. Note that you must have an operational (free) posit.cloud account to access.</p>
-</section>
-<section id="part-1-overview-of-des" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-overview-of-des"><a href="./content/01_oxford-des.html">Part 1: Overview of DES</a></h2>
-</section>
-<section id="part-2-conceptual-and-computational-issues" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-conceptual-and-computational-issues"><a href="./content/02-oxford-des.html">Part 2: Conceptual and Computational Issues</a></h2>
-</section>
-<section id="part-3-alive-dead-des" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-alive-dead-des"><a href="./content/03-oxford-des.html">Part 3: Alive-Dead DES</a></h2>
-</section>
-<section id="part-4-alive-sick-dead-des" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-alive-sick-dead-des"><a href="content/04-oxford-des.qmd">Part 4: Alive-Sick Dead DES</a></h2>
+</div>
+<div class="sticky-col">
+<div class="sticky-col-stack">
+<div id="cr-petri" class="sticky">
+<p><img src="images/petri-model5.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="cr-section cr-column-screen sidebar-left">
+<div class="narrative-col">
+<div class="trigger new-trigger" data-focus-on="cr-test">
+<div class="narrative">
+<p>Now let’s test this.</p>
+</div>
+</div>
+</div>
+<div class="sticky-col">
+<div class="sticky-col-stack">
+<div id="cr-test" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

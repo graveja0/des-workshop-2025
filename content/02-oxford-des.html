@@ -187,11 +187,6 @@ window.Quarto = {
 <p>… and how these realities affect their race performance (costs, health outcomes) and resource consumption.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-carrace3">
-<div class="narrative">
-
-</div>
-</div>
 </div>
 <div class="sticky-col">
 <div class="sticky-col-stack">
@@ -238,7 +233,7 @@ window.Quarto = {
 <p>A patient is represented by a solid black circle …</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-petri-token1" data-scale-by="2">
+<div class="trigger new-trigger" data-scale-by="2" data-focus-on="cr-petri-token1">
 <div class="narrative">
 <p>… while a hospital is represented by a solid red rectangle.</p>
 </div>
@@ -263,12 +258,12 @@ window.Quarto = {
 <p>Tokens reside in <span style="color:#6A6599FF"><strong>Places, </strong></span>which indicate system states or conditions (e.g., “Healthy,” “Sick,” “Dead”)</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-petri-place">
+<div class="trigger new-trigger" data-focus-on="cr-table2">
 <div class="narrative">
 <p>For many health decision models, places are simply health states.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="-25%, -50%" data-focus-on="cr-model6place" data-scale-by="2">
+<div class="trigger new-trigger" data-pan-to="-25%, -50%" data-scale-by="2" data-focus-on="cr-model6place">
 <div class="narrative">
 <p>But for a resource-constrained model, places could also represent hospitals, treatment slots, etc.</p>
 </div>
@@ -283,7 +278,7 @@ window.Quarto = {
 <p>Transitions are often denoted by bars or rectangles that denote discrete system state changes.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="100%, 15%" data-focus-on="cr-model6place" data-scale-by="3">
+<div class="trigger new-trigger" data-pan-to="100%, 15%" data-scale-by="3" data-focus-on="cr-model6place">
 <div class="narrative">
 <p>For example, disease incidence would be captured by a transition.</p>
 </div>
@@ -694,7 +689,7 @@ Source: <a href="https://en.wikipedia.org/wiki/Petri_net">Wikipedia</a>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-simmer">
 <div class="narrative">
-<p>simmer manages this utilizing a “heap” that makes the complexity <span class="math inline">\(\mathcal{O}(n \log n)\)</span></p>
+<p><strong>simmer</strong> manages this utilizing a “heap” that makes the complexity <span class="math inline">\(\mathcal{O}(n \log n)\)</span></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-convergence">
@@ -710,6 +705,11 @@ Source: <a href="https://en.wikipedia.org/wiki/Petri_net">Wikipedia</a>
 <div class="trigger new-trigger" data-focus-on="cr-clock">
 <div class="narrative">
 <p>With all that said, a <strong>simmer</strong> model run for a single strategy in the example progressive disease model we’ll run takes about <span style="color:crimson"><strong>75 seconds</strong></span> with 10,000 patients.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-convergence">
+<div class="narrative">
+<p>In this convergence plot, by 10k patients the DES has already converged quite a bit on the “truth.”</p>
 </div>
 </div>
 </div>
