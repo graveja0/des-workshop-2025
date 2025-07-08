@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -157,14 +123,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
+<div class="trigger new-trigger" data-scale-by="0.8" data-focus-on="cr-petrisick">
+<div class="narrative">
+<p>Our next objective is to build in a single <span style="color:crimson"><strong>sick</strong></span> health state.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-pan-to="90%, 50%" data-focus-on="cr-petrisick" data-scale-by="2.8">
+<div class="narrative">
+<p>Notice that the sick state will allow for disease recovery (i.e., a return to the <span style="color:#6A6599FF"><strong>Healthy</strong></span> state).</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-pan-to="90%, 50%" data-focus-on="cr-petrisick" data-scale-by="2.8">
+<div class="narrative">
+<p>We therefore need to add in two new transitions: (1) becoming ill; and (2) disease recovery.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>Let’s now re-define the model inputs.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="6" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>We include an annual hazard rate of progression from <span style="color:#6A6599FF"><strong>Healthy</strong></span> to <span style="color:#6A6599FF"><strong>Sick</strong></span>.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="7" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>As well as an annual disease recovery rate.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-highlight="8" data-focus-on="cr-inputs2">
+<div class="narrative">
+<p>The hazard rate of death from Healthy remains the same.</p>
+</div>
+</div>
 <div class="trigger new-trigger" data-focus-on="cr-petri">
 <div class="narrative">
 <p>This section of the tutorial will demonstrate how to implement different treatment strategies and summarise outcomes in a DES model.</p>
 </div>
 </div>
+<div class="trigger new-trigger" data-scale-by="1.2" data-focus-on="cr-petri">
+<div class="narrative">
+<p>We are skipping ahead just a bit to the full <strong>sick-sicker</strong> model shown in the Petri net diagram on the right.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-petri">
+<div class="narrative">
+<p>The full model adds in an additional health state <strong>sicker</strong> so we can fully replicate the progressive disease model in</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-petri">
+<div class="narrative">
+<p>We added in the <strong>sicker</strong> health state using a similar process as used to add in the <strong>sick</strong> health state earlier.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-petri">
+<div class="narrative">
+<p>The full model code can be found in the file <code>sick-sicker-replication.qmd</code> in the <a href="https://posit.cloud/content/10570508">posit.cloud</a> workspace.</p>
+</div>
+</div>
 </div>
 <div class="sticky-col">
 <div class="sticky-col-stack">
+<div id="cr-petrisick" class="sticky">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/petri-model4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
 <div id="cr-petri" class="sticky">
 <p><img src="images/petri-model5.png" class="img-fluid"></p>
 </div>
@@ -175,7 +203,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="narrative-col">
 <div class="trigger new-trigger" data-focus-on="cr-test">
 <div class="narrative">
-<p>Now let’s test this.</p>
+<p>Our ultimate goal is to create the CEA table shown here.</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-test">
+<div class="narrative">
+<p>To do so, we need to do two things: (1) for a given model run, aggregate and summarise individual patient trajectories into average cost and QALY outcomes; (2) run the model on the alternative different strategies.</p>
 </div>
 </div>
 </div>
@@ -183,7 +216,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sticky-col-stack">
 <div id="cr-test" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
