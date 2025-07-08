@@ -15,5 +15,6 @@ site_libs/
 _freeze/
 *.zip
 *.jar
+_ignore/
 
 

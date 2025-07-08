@@ -30,15 +30,15 @@ source(here('R/discount.R'))   # Discounting functions
 
 :::{.cr-section}
 
-@cr-bubble We will build up a DES that replicates the parameters and processes governing the progressive disease model in @alarid2023introductory. 
+[@cr-bubble]{scale-by="120%"} We will build up a DES that replicates the parameters and processes governing the progressive disease model in @alarid2023introductory. 
 
-@cr-daly This tutorial extends our more recent work taking the same model and demonstrating how to structure it to accurately estimate Disability-Adjusted Life Year (DALY) outcomes, published earlier this year in *Medical Decision Making* [@leech2025modeling]. 
+[@cr-daly]{scale-by="80%"} This tutorial extends our more recent work taking the same model and demonstrating how to structure it to accurately estimate Disability-Adjusted Life Year (DALY) outcomes, published earlier this year in *Medical Decision Making* [@leech2025modeling]. 
 
 :::{#cr-daly}
 ![](images/dalys.png)
 :::
 
-[@cr-bubble]{pan-to="50%,0%"} Patients start off healthy, and can then progress into progressive disease states ("Sick [S1]," "Sicker [S2]")---all while facing risks of death due to background causes, and heightened risk of death while sick.  
+[@cr-bubble]{pan-to="50%,0%" scale-by="120%"} Patients start off healthy, and can then progress into progressive disease states ("Sick [S1]," "Sicker [S2]")---all while facing risks of death due to background causes, and heightened risk of death while sick.  
 
 @cr-petri1  We will incrementally build up a Petri net diagram representing the same disease process.   
 
@@ -115,44 +115,44 @@ inputs <- list(
 
 @cr-model1_2 Let's think first about <span style="color:#79AF97FF">**resources**</span>. 
 
-@cr-model1_2 [Resources]{style="color:#79AF97FF"} are elements that a patient may use or consume during their time in the simulation. 
+@cr-model1_2 <span style="color:#79AF97FF">**Resources**</span> are elements that a patient may use or consume during their time in the simulation. 
 
 @cr-model1_2 We use the terms **"use"** and **"consume"** somewhat loosely here, because a resource could be something like a hospital bed that is needed for treatment---or it could simply be an element like time that is not constrained. 
 
 @cr-model1_2 In this very simple model, we need to conceptualize our first resource, which is <span style="color:#79AF97FF">**time in model**</span>. 
 
-The image here shows a single patient trajectory over time. We begin tracking the patient at baseline (t=0) and follow them until the end of the time horizon has been met at 30 years. @cr-model1-resources0
+The image here shows a single patient trajectory over time. We begin tracking the patient at baseline (t=0) and follow them until the end of the time horizon has been met at 30 years. [@cr-model1-resources0]{scale-by="180%"} 
 
-We can therefore define a resource called <span style="color:#79AF97FF">**time in model**</span> that we track. In this case, it will trivially be 30 years for every simulated patient.  @cr-model1-resources1 
+We can therefore define a resource called <span style="color:#79AF97FF">**time in model**</span> that we track. In this case, it will trivially be 30 years for every simulated patient.  [@cr-model1-resources1]{scale-by="180%"} 
 
 :::{#cr-model1-resources0}
 ![](images/model1-resources0.png)
 :::
 
 :::{#cr-model1-resources1}
-![](images/model1-resources1.png)
+![](images/model1-resources1.png){width=125%}
 :::
 
-But that does not always need to be the case! Suppose the patient dies at some time before t=30. In that case, their time in the model will be shorter. @cr-model1-resources1-death
+But that does not always need to be the case! Suppose the patient dies at some time before t=30. In that case, their time in the model will be shorter. [@cr-model1-resources1-death]{scale-by="180%"} 
 
 :::{#cr-model1-resources1-death}
-![](images/model1-resources1-death.png)
+![](images/model1-resources1-death.png){width=125%}
 :::
 
- @cr-model1-resources1-death It's also important to note that in this example patient trajectory, the resource `time_in_model` is unconstrained. That is, one simulated patient's experience of time does not inhibit or limit another patient from also experiencing the elapse of time. 
+[@cr-model1-resources1-death]{scale-by="180%"}  It's also important to note that in this example patient trajectory, the resource `time_in_model` is unconstrained. That is, one simulated patient's experience of time does not inhibit or limit another patient from also experiencing the elapse of time. 
 
-@cr-model1-resources1 Because the patient is followed for a defined time horizon, we can think of the resource as beginning at the initiation of the model, and ending after the time horizon is met. 
+[@cr-model1-resources1]{scale-by="180%"}  Because the patient is followed for a defined time horizon, we can think of the resource as beginning at the initiation of the model, and ending after the time horizon is met. 
 
-@cr-model1-resources2 The way DES conceptualizes this idea is that the [resource]{style="color:#79AF97FF"} is "seized" upon initiation of the model, and then "released" upon exit from the model. These two time stamps can then be used to calculate the total time the resource was "used." 
+[@cr-model1-resources2]{scale-by="180%"}  The way DES conceptualizes this idea is that the [resource]{style="color:#79AF97FF"} is "seized" upon initiation of the model, and then "released" upon exit from the model. These two time stamps can then be used to calculate the total time the resource was "used." 
 
 :::{#cr-model1-resources1}
-![](images/model1-resources2.png)
+![](images/model1-resources2.png){width=125%}
 :::
 
-@cr-model1-resources2 Often, the seizure and/or release of resources is triggered by <span style="color:#F44336">**events**</span>. We'll cover how to handle events in just a bit. 
+[@cr-model1-resources2]{scale-by="180%"}  Often, the seizure and/or release of resources is triggered by <span style="color:#F44336">**events**</span>. We'll cover how to handle events in just a bit. 
 
 :::{#cr-model1-resources2}
-![](images/model1-resources2.png)
+![](images/model1-resources2.png){width=125%}
 :::
 
 
@@ -204,7 +204,7 @@ And similarly, when the patient reaches the event of exiting the model at the de
 :::
 
 
-@cr-model1-event2 In the R/Simmer simulation environment, events are handled through functions that modify the trajectory of the patient.
+[@cr-model1-event2]{scale-by="180%"}  In the R/Simmer simulation environment, events are handled through functions that modify the trajectory of the patient.
 
 Let's start by defining an event for model initialization. @cr-Rinitialize1
 
@@ -334,8 +334,6 @@ cleanup_on_termination <- function(traj)
 ```
 :::
 
-
-@cr-Rcleanup2
 
 :::{#cr-Rcleanup2}
 ```{r}

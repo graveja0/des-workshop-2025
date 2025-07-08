@@ -217,7 +217,7 @@ html {
 
 /* Table notes styling */
 .tbl-note {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 100;    /* Light weight for subtle appearance */
 }
 
@@ -329,14 +329,14 @@ div[data-bs-target] {
 /* Make kable tables larger */
 .kable-table table,
 table {
-  font-size: 1.4rem !important;
+  font-size: 1.3rem !important;
 }
 
 .kable-table th,
 .kable-table td,
 table th,
 table td {
-  font-size: 1.4rem !important;
+  font-size: 1.3rem !important;
   padding: 0.8rem !important;
 }
 
