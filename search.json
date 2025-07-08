@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "About this site\n\n\n[1] 2"
   },
   {
     "objectID": "content/03-oxford-des.html",
@@ -116,7 +116,7 @@
     "href": "content/01_oxford-des.html#errors-in-expectation-2",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "1. Errors in Expectation",
-    "text": "1. Errors in Expectation\n\n# Create the table with kable and kableExtra\nkable(errors_table[1,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\") %&gt;% \n  row_spec(1,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓"
+    "text": "1. Errors in Expectation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#estimation-errors",
@@ -130,7 +130,7 @@
     "href": "content/01_oxford-des.html#estimation-errors-1",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "2. Estimation Errors",
-    "text": "2. Estimation Errors\n\n# Create the table with kable and kableExtra\nkable(errors_table[1:2,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\")  %&gt;% \n  row_spec(2,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓"
+    "text": "2. Estimation Errors\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#section-13",
@@ -158,7 +158,7 @@
     "href": "content/01_oxford-des.html#integration-error-1",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "3. Integration Error",
-    "text": "3. Integration Error\n\n# Create the table with kable and kableExtra\nkable(errors_table[1:3,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\")  %&gt;% \n  row_spec(3,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓"
+    "text": "3. Integration Error\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#stochastic-error",
@@ -172,7 +172,7 @@
     "href": "content/01_oxford-des.html#stochastic-error-1",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "4. Stochastic Error",
-    "text": "4. Stochastic Error\n\n# Create the table with kable and kableExtra\nkable(errors_table[1:4,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\") %&gt;% \n  row_spec(4,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓"
+    "text": "4. Stochastic Error\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#embedding-error",
@@ -186,7 +186,7 @@
     "href": "content/01_oxford-des.html#embedding-error-1",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "5. Embedding Error",
-    "text": "5. Embedding Error\n\n# Create the table with kable and kableExtra\nkable(errors_table[1:5,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\") %&gt;% \n  row_spec(5,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓\n\n\nEmbedding\n\n✓\n✓"
+    "text": "5. Embedding Error\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓\n\n\nEmbedding\n\n✓\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#truncation-error",
@@ -228,7 +228,7 @@
     "href": "content/01_oxford-des.html#truncation-error-1",
     "title": "Discrete Event Simulation for Health Economic Modelling",
     "section": "Truncation Error",
-    "text": "Truncation Error\n\n# Create the table with kable and kableExtra\nkable(errors_table[,], \n      col.names = c(\"Error Type\", \"DEQ\", \"MRKCHRT\", \"MICROSIM\", \"DES\")\n     ) %&gt;%\n  kable_styling(bootstrap_options = c(\"striped\", \"hover\", \"condensed\", \"responsive\"),\n                full_width = FALSE) %&gt;%\n  add_header_above(c(\" \" = 1, \"Deterministic Models\" = 2, \"Stochastic Models\" = 2)) %&gt;%\n  column_spec(1, bold = TRUE, width = \"2cm\") %&gt;%\n  column_spec(2:5, width = \"1.5cm\") %&gt;% \n  row_spec(6,  color = \"dodgerblue\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓\n\n\nEmbedding\n\n✓\n✓\n\n\n\nTruncation\n\n\n✓"
+    "text": "Truncation Error\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeterministic Models\n\n\nStochastic Models\n\n\n\nError Type\nDEQ\nMRKCHRT\nMICROSIM\nDES\n\n\n\n\nStructural\n✓\n✓\n✓\n✓\n\n\nEstimation and sampling\n✓\n✓\n✓\n✓\n\n\nIntegration\n\n✓\n✓\n\n\n\nStochastic\n\n\n✓\n✓\n\n\nEmbedding\n\n✓\n✓\n\n\n\nTruncation\n\n\n✓"
   },
   {
     "objectID": "content/01_oxford-des.html#what-does-des-buy-you",
@@ -263,7 +263,7 @@
     "href": "content/05_oxford-des.html",
     "title": "Part 5. Implementing Strategies and Summarising Outputs",
     "section": "",
-    "text": "Our next objective is to build in a single sick health state.\n\n\n\n\nNotice that the sick state will allow for disease recovery (i.e., a return to the Healthy state).\n\n\n\n\nWe therefore need to add in two new transitions: (1) becoming ill; and (2) disease recovery.\n\n\n\n\nLet’s now re-define the model inputs.\n\n\n\n\nWe include an annual hazard rate of progression from Healthy to Sick.\n\n\n\n\nAs well as an annual disease recovery rate.\n\n\n\n\nThe hazard rate of death from Healthy remains the same.\n\n\n\n\nThis section of the tutorial will demonstrate how to implement different treatment strategies and summarise outcomes in a DES model.\n\n\n\n\nWe are skipping ahead just a bit to the full sick-sicker model shown in the Petri net diagram on the right.\n\n\n\n\nThe full model adds in an additional health state sicker so we can fully replicate the progressive disease model in\n\n\n\n\nWe added in the sicker health state using a similar process as used to add in the sick health state earlier.\n\n\n\n\nThe full model code can be found in the file sick-sicker-replication.qmd in the posit.cloud workspace.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOur ultimate goal is to create the CEA table shown here.\n\n\n\n\nTo do so, we need to do two things: (1) for a given model run, aggregate and summarise individual patient trajectories into average cost and QALY outcomes; (2) run the model on the alternative different strategies.\n\n\n\n\n\n\n\n\n[1] 2"
+    "text": "This section of the tutorial will demonstrate how to implement different treatment strategies and summarise outcomes in a DES model.\n\n\n\n\nThe table shown here is our ultimate goal—it shows cost and QALY outcomes, as well as incremental cost-effectiveness results, for the four strategies considered in alarid2023introductory.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Standard of Care (no treatments)\nset.seed(123)\nrun.SoC &lt;- des_run(modifyList(inputs, list(treatA = FALSE, treatB = FALSE)))\n\n#- Treatment A\nset.seed(123)\nrun.A &lt;- des_run(modifyList(inputs, list(treatA = TRUE, treatB = FALSE)))\nrun.A %&gt;% as_tibble() %&gt;% filter(name == \"patient2\") %&gt;% mutate(foo = !as.integer(resource == \"time_in_model\")) %&gt;% arrange(foo,start_time,end_time) %&gt;% dplyr::select(-foo)\n\n# A tibble: 9 × 10\n  name     start_time end_time activity_time resource  replication   cost  dcost\n  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 patient2       0        4.49         4.49  time_in_…           1     0      0 \n2 patient2       0        2.11         2.11  healthy             1  4220.  4091.\n3 patient2       2.11     2.86         0.751 sick1               1  3004.  2791.\n4 patient2       2.11     2.86         0.751 A                   1  9012.  8373.\n5 patient2       2.86     3.11         0.251 healthy             1   501.   459.\n6 patient2       3.11     3.65         0.538 sick1               1  2151.  1947.\n7 patient2       3.11     4.49         1.37  A                   1 16498. 14747.\n8 patient2       3.65     4.49         0.837 sick2               1 12556. 11134.\n9 patient2       4.49     4.49         0     death               1     0      0 \n# ℹ 2 more variables: qaly &lt;dbl&gt;, dqaly &lt;dbl&gt;\n\n#- Treatment B\nset.seed(123)\nrun.B &lt;-  des_run(modifyList(inputs, list(treatA = FALSE, treatB = TRUE)))\n\n# Treatment A + B\nset.seed(123)\nrun.AB &lt;- des_run(modifyList(inputs, list(treatA = TRUE, treatB = TRUE)))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmethod\nStrategy\nCost\nEffect\nInc_Cost\nInc_Effect\nICER\nStatus\n\n\n\n\nDES\nSoC\n158970.2\n21.52921\nNA\nNA\nNA\n\n\n\nDES\nA\n292620.0\n22.22509\n133649.8\n0.6958788\n192059.0\n\n\n\nDES\nAB\n423064.2\n22.85101\n130444.2\n0.6259175\n208404.8\n\n\n\nDES\nB\n290817.6\n21.96967\nNA\nNA\nNA\nDominatd (Extended)"
   },
   {
     "objectID": "content/04_oxford-des.html",

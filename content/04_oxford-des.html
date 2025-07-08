@@ -188,17 +188,17 @@ window.Quarto = {
 
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-scale-by="0.8" data-focus-on="cr-petrisick">
+<div class="trigger new-trigger" data-focus-on="cr-petrisick">
 <div class="narrative">
 <p>Our next objective is to build in a single <span style="color:crimson"><strong>sick</strong></span> health state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="90%, 50%" data-scale-by="2.8" data-focus-on="cr-petrisick">
+<div class="trigger new-trigger" data-pan-to="90%, 50%" data-focus-on="cr-petrisick" data-scale-by="2.8">
 <div class="narrative">
 <p>Notice that the sick state will allow for disease recovery (i.e., a return to the <span style="color:#6A6599FF"><strong>Healthy</strong></span> state).</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="90%, 50%" data-scale-by="2.8" data-focus-on="cr-petrisick">
+<div class="trigger new-trigger" data-pan-to="90%, 50%" data-focus-on="cr-petrisick" data-scale-by="2.8">
 <div class="narrative">
 <p>We therefore need to add in two new transitions: (1) becoming ill; and (2) disease recovery.</p>
 </div>
@@ -208,57 +208,57 @@ window.Quarto = {
 <p>Let’s now re-define the model inputs.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="6" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="6">
 <div class="narrative">
 <p>We include an annual hazard rate of progression from <span style="color:#6A6599FF"><strong>Healthy</strong></span> to <span style="color:#6A6599FF"><strong>Sick</strong></span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="7" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="7">
 <div class="narrative">
 <p>As well as an annual disease recovery rate.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="8" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="8">
 <div class="narrative">
 <p>The hazard rate of death from Healthy remains the same.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="9" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="9">
 <div class="narrative">
 <p>But patients in the sick state have a higher rate of death, as summarized by a hazard ratio.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="11-15" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="11-15">
 <div class="narrative">
 <p>Later we’ll build in some accounting of costs and quality of life, so we include cost and QALY parameters in the inputs as well.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="18" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="18">
 <div class="narrative">
 <p>We’ll also cover point and interval discounting when we come to outcome estimation.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="1-6" data-focus-on="cr-initialize">
+<div class="trigger new-trigger" data-focus-on="cr-initialize" data-highlight="1-6">
 <div class="narrative">
 <p>Let’s add the sick state to the counters.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-initialize">
+<div class="trigger new-trigger" data-focus-on="cr-initialize" data-highlight="5">
 <div class="narrative">
 <p>Note that we index sick with a value of 1. That’s because <strong>simmer</strong> requires that health states be tracked using a numeric categorical variable that starts with zero.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="8-16" data-focus-on="cr-initialize">
+<div class="trigger new-trigger" data-focus-on="cr-initialize" data-highlight="8-16">
 <div class="narrative">
 <p>We next add code initilise all patients into the healthy state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="14" data-focus-on="cr-initialize">
+<div class="trigger new-trigger" data-focus-on="cr-initialize" data-highlight="14">
 <div class="narrative">
 <p>We do this be setting the <code>state</code> attribute value to zero upon inilialisation of the patient.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="15" data-focus-on="cr-initialize">
+<div class="trigger new-trigger" data-focus-on="cr-initialize" data-highlight="15">
 <div class="narrative">
 <p>We’ll also want to track the amount of time spent in the healthy state later, for estimation of quality-of-life. So we need to add time in the <span style="color:#6A6599FF"><strong>healthy</strong></span> state to our resource counters.</p>
 </div>
@@ -278,12 +278,12 @@ window.Quarto = {
 <p>Once the patient transitions into the <strong>sick</strong> state, we reset her state attribute to a value of 1 (i.e., sick).</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="5,6" data-focus-on="cr-sickevent2b">
+<div class="trigger new-trigger" data-focus-on="cr-sickevent2b" data-highlight="5,6">
 <div class="narrative">
 <p>She also releases the <code>healthy</code> resource and seizes the <code>sick</code> resouce. Again, this facilitates tracking total amount of time in each health state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-pan-to="90%, 60%" data-scale-by="2.8" data-focus-on="cr-petrisick">
+<div class="trigger new-trigger" data-pan-to="90%, 60%" data-focus-on="cr-petrisick" data-scale-by="2.8">
 <div class="narrative">
 <p>Recall that in this model, patients can recover and become healthy again.</p>
 </div>
@@ -318,12 +318,12 @@ window.Quarto = {
 <p>With the simple Healthy-Sick-Dead model built, let’s now turn to outcome estimation.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="11-15" data-focus-on="cr-inputs2">
+<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="11-15">
 <div class="narrative">
 <p>Recall that earlier, we included cost and utility weights in the inputs.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="12-13" data-focus-on="cr-desrun2">
+<div class="trigger new-trigger" data-focus-on="cr-desrun2" data-highlight="12-13">
 <div class="narrative">
 <p>Outcome estimation takes place after the model has run all patients. We do it by simply calculating and adding <strong>cost</strong> and <strong>QALY</strong> columns to the model output.</p>
 </div>
@@ -333,7 +333,7 @@ window.Quarto = {
 <p>We’ll now define two functions, <code>cost_arrivals()</code> and <code>qaly_arrivals()</code> that take care of this process.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="12-13" data-focus-on="cr-desrun2">
+<div class="trigger new-trigger" data-focus-on="cr-desrun2" data-highlight="12-13">
 <div class="narrative">
 <p>These functions will be tucked into the very end of the <code>des_run()</code> function we defined that runs the simulation model.</p>
 </div>
@@ -353,17 +353,17 @@ window.Quarto = {
 <p>The table here shows partial trajectory (“arrivals”) information for a single patient; we saw this patient’s trajetory a bit earlier.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="3" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="3">
 <div class="narrative">
 <p>Let’s focus first on undiscounted costs, which start off as zero.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="6" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="6">
 <div class="narrative">
 <p>We first select all time periods where the patient is in the <span style="color:#6A6599FF"><strong>healthy</strong></span> state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="7-8" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="7-8">
 <div class="narrative">
 <p>We next apply the cost parameter to the total time spent in the <span style="color:#6A6599FF"><strong>healthy</strong></span> state, which is <code>end_time</code> - <code>start_time</code></p>
 </div>
@@ -373,12 +373,12 @@ window.Quarto = {
 <p>The table shows the net result. The selected rows are highlighted in green, and we can see that the cost for each interval as been calculated.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="12-14" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="12-14">
 <div class="narrative">
 <p>We repeat the same process for the <strong>sick</strong> health state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="12-14" data-focus-on="cr-costarrivalsresults2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivalsresults2" data-highlight="12-14">
 <div class="narrative">
 <p>We repeat the same process for the <strong>sick</strong> health state.</p>
 </div>
@@ -393,7 +393,7 @@ window.Quarto = {
 <p>For example, suppose there is a one-time cost of end-of-life care. We could simply add this at the time of death.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="4,9,10,11,16,17,18" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="4,9,10,11,16,17,18">
 <div class="narrative">
 <p>Let’s now discuss discounting in DES model outputs.</p>
 </div>
@@ -423,7 +423,7 @@ window.Quarto = {
 <p>Now suppose we want to discount the value 1 over the time period <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=1\)</span>. For example, this type of discounting would apply for time spent in a health state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="9,10,11,16,17,18" data-focus-on="cr-costarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-costarrivals2" data-highlight="9,10,11,16,17,18">
 <div class="narrative">
 <p>Our cost calculation approach applies the <code>discount_value()</code> function to all time periods to calculate discounted costs.</p>
 </div>
@@ -433,7 +433,7 @@ window.Quarto = {
 <p>We define a similar <code>qaly_arrivals()</code> function to calculate quality of life based on utility weights.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-highlight="8,17" data-focus-on="cr-qalyarrivals2">
+<div class="trigger new-trigger" data-focus-on="cr-qalyarrivals2" data-highlight="8,17">
 <div class="narrative">
 <p>The only major difference is that we multiply time in each health state with its corresponding utility weight.</p>
 </div>

@@ -21,28 +21,15 @@
 }
 
 /* =================================================================
-   FIX FOR HORIZONTAL SCROLLING - PREVENT OVERFLOW
-   ================================================================= */
-
-/* Prevent horizontal overflow on all containers */
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  box-sizing: border-box;
-  background-color: white !important;
-}
-
-/* Ensure all elements use border-box sizing */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-/* =================================================================
    GLOBAL BACKGROUND STYLES
    ================================================================= */
 
 /* Force white background on main layout elements */
 body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-layout-cell {
+  background-color: white !important;
+}
+
+html {
   background-color: white !important;
 }
 
@@ -57,9 +44,6 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
   margin-bottom: 20vh;  /* Large bottom margin for spacing */
   padding-bottom: 10vh; /* Additional bottom padding */
   z-index: 1;          /* Ensure content appears above background elements */
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  box-sizing: border-box;
 }
 
 /* Main headings (H1) styling */
@@ -77,11 +61,7 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
 /* Base closeread section - transparent background */
 .cr-section {
   background-color: white !important;
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  box-sizing: border-box;
 }
-
 .cr-section.sidebar-left,
 .cr-section.sidebar-right,
 .cr-section.overlay-left,
@@ -91,13 +71,11 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
   background-color: white !important;
 }
 
+
 .cr-section .sticky-col {
   background-color: white !important;
-  padding-left: 10px !important;   /* Minimal padding */
-  padding-right: 10px !important;  /* Minimal padding */
-  width: 75vw !important;          /* Fixed width - gives most space to image */
-  box-sizing: border-box;
-  flex-shrink: 0;                  /* Prevent shrinking */
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 /* Narrative columns should be white (except where specifically overridden for overlays) */
@@ -114,15 +92,18 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
    SIDEBAR-LEFT LAYOUT
    ================================================================= */
 
+/* Sticky column in sidebar-left layout */
+.cr-section.sidebar-left .sticky-col {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 /* Narrative column (text content) in sidebar-left layout */
 .cr-section.sidebar-left .narrative-col {
   background-color: transparent;
-  font-family: "Fira Sans";        /* Clean sans-serif for readability */
-  width: 25vw !important;          /* Fixed width instead of min/max */
-  padding-left: 10px !important;   /* Minimal padding */
-  padding-right: 10px !important;  /* Minimal padding */
-  box-sizing: border-box;
-  flex-shrink: 0;                  /* Prevent shrinking */
+  font-family: "Fira Sans";    /* Clean sans-serif for readability */
+  min-width: 40svw;            /* 40% of viewport width minimum */
+  padding-left: 80px;          /* Large left padding for text offset */
 }
 
 /* First block in sidebar-left gets special top padding for positioning */
@@ -141,13 +122,10 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
   font-family: "Crimson Text";             /* Elegant serif font */
   font-size: 1.5rem;
   text-align: center;
-  min-width: 40vw !important;              /* Reduced from 50vw */
-  max-width: 80vw !important;              /* Add maximum width */
+  min-width: 50svw;                        /* 50% of viewport width minimum */
   position: absolute;                      /* Positioned absolutely for overlay */
   left: 50%;
   transform: translate(-50%, -50%);        /* Center horizontally and vertically */
-  padding: 20px !important;                /* Add padding for better spacing */
-  box-sizing: border-box;
 }
 
 /* First block in overlay-center starts at middle of viewport */
@@ -216,21 +194,6 @@ body, section, header, main, .quarto-layout-panel, .quarto-layout-row, .quarto-l
    TABLE STYLES
    ================================================================= */
 
-/* Make tables responsive and prevent overflow */
-table {
-  max-width: 100% !important;
-  table-layout: auto !important;
-  word-wrap: break-word !important;
-  overflow-x: auto !important;
-  box-sizing: border-box;
-}
-
-/* Wrap table in container if needed */
-.table-responsive {
-  overflow-x: auto !important;
-  max-width: 100% !important;
-}
-
 /* Classic table styling with prominent borders */
 .tbl-classic th {
   border-top: 5px solid #000 !important;    /* Thick top border on headers */
@@ -292,20 +255,17 @@ table {
     line-height: 1;
   }
 
-  /* All narrative columns become transparent on mobile with proper sizing */
+  /* All narrative columns become transparent on mobile */
   .cr-section.sidebar-left .narrative-col,
   .cr-section.sidebar-right .narrative-col,
   .cr-section.overlay-left .narrative-col,
   .cr-section.overlay-right .narrative-col,
   .cr-section.overlay-center .narrative-col {
     background-color: transparent;
-    font-family: "Fira Sans";        /* Clean sans-serif for readability */
-    font-size: 2.2rem;               /* 20% larger than default */
-    min-width: 30vw !important;      /* Reduced from 40vw */
-    max-width: 90vw !important;      /* Add maximum width */
-    padding-left: 20px !important;   /* Reduced from 80px */
-    padding-right: 20px !important;  /* Add right padding */
-    box-sizing: border-box;
+    font-family: "Fira Sans";    /* Clean sans-serif for readability */
+    font-size: 2.2rem;           /* ADD THIS LINE - 20% larger than default */
+    min-width: 40svw;            /* 40% of viewport width minimum */
+    padding-left: 80px;          /* Large left padding for text offset */
   }
 
   /* Mobile narrative styling - all text becomes overlay-style */
@@ -321,12 +281,10 @@ table {
     font-weight: 200;
     font-size: 2rem;
     text-align: center;
-    min-width: 40vw !important;      /* Reduced from 50vw */
-    max-width: 85vw !important;      /* Add maximum width */
+    min-width: 50svw;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-sizing: border-box;
   }
 
   /* Remove padding from trigger narratives on mobile */
@@ -350,16 +308,6 @@ table {
   .tbl-note {
     font-size: 0.7rem;
   }
-
-  /* Mobile table adjustments */
-  .kable-table table,
-  table {
-    font-size: 1rem !important;     /* Reduced from 1.3rem */
-    max-width: 100% !important;
-    display: block !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-  }
 }
 
 /* Target any other Quarto-specific containers that might have grey backgrounds */
@@ -378,12 +326,10 @@ div[data-bs-target] {
 
 /* FOR SLIDE-LIKE DOCUMENT */
 
-/* Make kable tables larger but responsive */
+/* Make kable tables larger */
 .kable-table table,
 table {
   font-size: 1.3rem !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
 }
 
 .kable-table th,
@@ -394,21 +340,36 @@ table td {
   padding: 0.8rem !important;
 }
 
-/* Make sidebar-left narrative text much larger but fit in smaller space */
+/* Make sidebar-left narrative text much larger */
 .cr-section.sidebar-left .narrative-col .narrative p {
-  font-size: 1.6rem !important;    /* Reduced from 2rem to fit in narrower column */
-  line-height: 1.3 !important;     /* Tighter line height */
+  font-size: 2rem !important;
+  line-height: 1.4 !important;
 }
 
 /* =================================================================
-   SUMMARY OF KEY CHANGES FOR HORIZONTAL SCROLLING FIX:
+   SUMMARY OF KEY FEATURES:
    
-   1. Added overflow-x: hidden to html, body, and major containers
-   2. Set box-sizing: border-box globally
-   3. Reduced excessive padding (80px -> 40px)
-   4. Added max-width constraints to prevent overflow
-   5. Made tables responsive with overflow-x: auto
-   6. Adjusted mobile breakpoints for better viewport fit
-   7. Reduced minimum widths for narrative columns
-   8. Added proper responsive table handling
+   1. TYPOGRAPHY: Multiple Google Fonts for different content types
+      - Roboto Slab: Main content and headings
+      - Fira Sans: Sidebar narratives  
+      - Crimson Text: Overlay narratives
+      - Oswald: Info section
+      - Barlow Condensed: Labels and mobile text
+
+   2. LAYOUTS: Three main closeread layouts
+      - sidebar-left: Text alongside sticky visual content
+      - overlay-center: Text overlaid on visual content
+      - Mobile: All layouts become overlay-style
+
+   3. RESPONSIVE: Mobile-first approach with overlay styling
+      on small screens for better readability
+
+   4. VISUAL ELEMENTS: 
+      - Highlight colors for emphasis
+      - Table styling options
+      - Icon list formatting
+      - Fixed footer info section
+
+   5. SCROLLYTELLING: Specialized padding and positioning
+      for scroll-triggered narrative content
    ================================================================= */

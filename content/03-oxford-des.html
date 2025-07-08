@@ -206,17 +206,17 @@ window.Quarto = {
 
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-focus-on="cr-bubble" data-scale-by="120%">
+<div class="trigger new-trigger" data-scale-by="120%" data-focus-on="cr-bubble">
 <div class="narrative">
 <p>We will build up a DES that replicates the parameters and processes governing the progressive disease model in <span class="citation" data-cites="alarid2023introductory">Alarid-Escudero et al. (<a href="#ref-alarid2023introductory" role="doc-biblioref">2023</a>)</span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-daly" data-scale-by="80%">
+<div class="trigger new-trigger" data-scale-by="80%" data-focus-on="cr-daly">
 <div class="narrative">
 <p>This tutorial extends our more recent work taking the same model and demonstrating how to structure it to accurately estimate Disability-Adjusted Life Year (DALY) outcomes, published earlier this year in <em>Medical Decision Making</em> <span class="citation" data-cites="leech2025modeling">(<a href="#ref-leech2025modeling" role="doc-biblioref">Leech et al. 2025</a>)</span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-bubble" data-pan-to="50%,0%" data-scale-by="120%">
+<div class="trigger new-trigger" data-pan-to="50%,0%" data-scale-by="120%" data-focus-on="cr-bubble">
 <div class="narrative">
 <p>Patients start off healthy, and can then progress into progressive disease states (“Sick [S1],” “Sicker [S2]”)—all while facing risks of death due to background causes, and heightened risk of death while sick.</p>
 </div>
@@ -260,17 +260,17 @@ window.Quarto = {
 <p>We start with a simple model that follows patients for <span class="math inline">\(T\)</span> time units.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1token" data-pan-to="65%, 20%" data-scale-by="1.5">
+<div class="trigger new-trigger" data-pan-to="65%, 20%" data-scale-by="1.5" data-focus-on="cr-model1token">
 <div class="narrative">
 <p>In this simple model, we have a population of “tokens” that start off in the healthy state.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1token" data-pan-to="65%, 20%" data-scale-by="1.5">
+<div class="trigger new-trigger" data-pan-to="65%, 20%" data-scale-by="1.5" data-focus-on="cr-model1token">
 <div class="narrative">
 <p>For ease of visualisation, we’ll suppress the patient tokens for the remainder of our model diagram buildup.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1" data-pan-to="-50%, -35%">
+<div class="trigger new-trigger" data-pan-to="-50%, -35%" data-focus-on="cr-model1">
 <div class="narrative">
 <p>To begin, we will assume this population can only experience one event: <span class="math inline">\(\,\)</span>reaching the end of the simulation at some time T.</p>
 </div>
@@ -350,37 +350,37 @@ window.Quarto = {
 <p>In this very simple model, we need to conceptualize our first resource, which is <span style="color:#79AF97FF"><strong>time in model</strong></span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources0" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources0">
 <div class="narrative">
 <p>The image here shows a single patient trajectory over time. We begin tracking the patient at baseline (t=0) and follow them until the end of the time horizon has been met at 30 years.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources1" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources1">
 <div class="narrative">
 <p>We can therefore define a resource called <span style="color:#79AF97FF"><strong>time in model</strong></span> that we track. In this case, it will trivially be 30 years for every simulated patient.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources1-death" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources1-death">
 <div class="narrative">
 <p>But that does not always need to be the case! Suppose the patient dies at some time before t=30. In that case, their time in the model will be shorter.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources1-death" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources1-death">
 <div class="narrative">
 <p>It’s also important to note that in this example patient trajectory, the resource <code>time_in_model</code> is unconstrained. That is, one simulated patient’s experience of time does not inhibit or limit another patient from also experiencing the elapse of time.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources1" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources1">
 <div class="narrative">
 <p>Because the patient is followed for a defined time horizon, we can think of the resource as beginning at the initiation of the model, and ending after the time horizon is met.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources2" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources2">
 <div class="narrative">
 <p>The way DES conceptualizes this idea is that the <span style="color:#79AF97FF">resource</span> is “seized” upon initiation of the model, and then “released” upon exit from the model. These two time stamps can then be used to calculate the total time the resource was “used.”</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-resources2" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-resources2">
 <div class="narrative">
 <p>Often, the seizure and/or release of resources is triggered by <span style="color:#F44336"><strong>events</strong></span>. We’ll cover how to handle events in just a bit.</p>
 </div>
@@ -410,17 +410,17 @@ window.Quarto = {
 <p>2. Model exit after the specified horizon has been reached.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-event2" data-pan-to="50%, -60%" data-scale-by="2">
+<div class="trigger new-trigger" data-pan-to="50%, -60%" data-scale-by="2" data-focus-on="cr-model1-event2">
 <div class="narrative">
 <p>Both of these events trigger resource seizure and/or release, in the sense that when a patient is initialized in the model, we want to start the clock on the <code>time_in_model</code> counter.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-event2" data-pan-to="-50%, -60%" data-scale-by="2">
+<div class="trigger new-trigger" data-pan-to="-50%, -60%" data-scale-by="2" data-focus-on="cr-model1-event2">
 <div class="narrative">
 <p>And similarly, when the patient reaches the event of exiting the model at the defined time horizon, we want to stop the clock on <code>time_in_model</code>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-event2" data-scale-by="180%">
+<div class="trigger new-trigger" data-scale-by="180%" data-focus-on="cr-model1-event2">
 <div class="narrative">
 <p>In the R/Simmer simulation environment, events are handled through functions that modify the trajectory of the patient.</p>
 </div>
@@ -430,27 +430,27 @@ window.Quarto = {
 <p>Let’s start by defining an event for model initialization.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rinitialize1" data-highlight="1">
+<div class="trigger new-trigger" data-highlight="1" data-focus-on="cr-Rinitialize1">
 <div class="narrative">
 <p><code>initialize_patient</code> is a function of both <strong>inputs</strong> (i.e., the parameters governing the model) and <span style="color:#B24745FF"><strong>trajectories</strong></span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rinitialize1" data-highlight="4">
+<div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Rinitialize1">
 <div class="narrative">
 <p>It takes the patient’s trajectory and <strong>seizes</strong> the resource <code>time_in_model</code> that we defined above.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model1-event2" data-pan-to="50%, -60%" data-scale-by="2">
+<div class="trigger new-trigger" data-pan-to="50%, -60%" data-scale-by="2" data-focus-on="cr-model1-event2">
 <div class="narrative">
 <p>Going back to the single patient trajectory, upon initilization of the patient we have “seized” the <code>time_in_model</code> resource for this patient.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rinitialize2" data-highlight="5">
+<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-Rinitialize2">
 <div class="narrative">
 <p>Though we don’t need it for this very simple model, <code>initialize_patient</code> is also a good place to set initial attributes of patients, such as their age, gender, etc.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rinitialize2" data-highlight="5">
+<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-Rinitialize2">
 <div class="narrative">
 <p>We can then use (and update!) these attributes in the model so they can govern transitions and other events.</p>
 </div>
@@ -539,17 +539,17 @@ window.Quarto = {
 </div>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup0" data-highlight="4">
+<div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Rcleanup0">
 <div class="narrative">
 <p>In this function, we take the patient’s trajectory and introduce a <strong>branch</strong>. You can think of this like a chance node in a decision tree—this puts our patient at a fork in the road, and each pathway has its own probability of being taken.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup0" data-highlight="4">
+<div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Rcleanup0">
 <div class="narrative">
 <p>In this case, however, the patient is exiting the model. So this is a trivial function with only one option that has a probability of one.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup0" data-highlight="5">
+<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-Rcleanup0">
 <div class="narrative">
 <p>The option <code>continue</code> is also set to false—indicating that after this branch has been passed, the model will stop running.</p>
 </div>
@@ -564,17 +564,17 @@ window.Quarto = {
 <p>Branches will also be key for how we conceptualize and model resource constraints later on.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup0" data-highlight="7">
+<div class="trigger new-trigger" data-highlight="7" data-focus-on="cr-Rcleanup0">
 <div class="narrative">
 <p>Once the patient has passed through the branch, we release the resource <code>time_in_model</code>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup1" data-highlight="1-5">
+<div class="trigger new-trigger" data-highlight="1-5" data-focus-on="cr-Rcleanup1">
 <div class="narrative">
 <p>In our experience, it is often helpful to split this process into two parts: <span class="hl hl-cyan">A function that releases any resources on exit</span>.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rcleanup1" data-highlight="7-15">
+<div class="trigger new-trigger" data-highlight="7-15" data-focus-on="cr-Rcleanup1">
 <div class="narrative">
 <p>And a separate <span class="hl hl-cyan">function that terminates the simulation</span> .</p>
 </div>
@@ -584,27 +584,27 @@ window.Quarto = {
 <p>Eventually, once the model is run, we want to return an <span style="color:#F44336"><strong>Event Registry</strong></span> which records all relevant events and when they happened. In this case, the only event of interest is a transition out of the model once the time horizon has been reached.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg" data-highlight="3">
+<div class="trigger new-trigger" data-highlight="3" data-focus-on="cr-Reventreg">
 <div class="narrative">
 <p>This line defines an attribute for the patient that tells us that the patient reached the termination of the model (i.e., didn’t exit for some other reason).</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg" data-highlight="4">
+<div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Reventreg">
 <div class="narrative">
 <p>This line defines a function that draws the time to event. In this case, we want the event time to happen after the time horizon has been reached.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg" data-highlight="4">
+<div class="trigger new-trigger" data-highlight="4" data-focus-on="cr-Reventreg">
 <div class="narrative">
 <p>In this very simple model, there are no events that occur between <span class="math inline">\(t=0\)</span> and the time horizon. But in more complex models, other events will occur. The function therefore makes sure that the time horizon remains fixed (i.e., isn’t 110 years after the last event occurs!)</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg" data-highlight="5">
+<div class="trigger new-trigger" data-highlight="5" data-focus-on="cr-Reventreg">
 <div class="narrative">
 <p>At the time of the event happening (i.e., reaching the time horizon) we fire off the function <code>terminate_simulation()</code> that we defined earlier.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg" data-highlight="6">
+<div class="trigger new-trigger" data-highlight="6" data-focus-on="cr-Reventreg">
 <div class="narrative">
 <p><code>reactive</code> is an option that, if set to <code>TRUE</code>, would redraw the event time. It essentially allows for repeated events in the model.</p>
 </div>
@@ -614,32 +614,32 @@ window.Quarto = {
 <p>We’re now ready to create a function that executes the model.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="1">
+<div class="trigger new-trigger" data-highlight="1" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>This function only takes the input object as its input.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="3">
+<div class="trigger new-trigger" data-highlight="3" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>It then defines a simulation environment. Think of this as a self-contained space with all the tools and objects needed to run the DES.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="5-6">
+<div class="trigger new-trigger" data-highlight="5-6" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>Within this environment, we define the counters.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="7">
+<div class="trigger new-trigger" data-highlight="7" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>This line tells <strong>simmer</strong> that we want to generate <span class="math inline">\(N\)</span> trajectories, where <span class="math inline">\(N\)</span> is defined in <code>inputs</code> and is the total simulated patient size. Each patient starts at time 0.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="8">
+<div class="trigger new-trigger" data-highlight="8" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>We now run the simulation just past the maximum time horizon to ensure that we capture everyone exiting the model.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Rdesrun" data-highlight="9">
+<div class="trigger new-trigger" data-highlight="9" data-focus-on="cr-Rdesrun">
 <div class="narrative">
 <p>This line extracts the “monitoring statistics” from the simulation environment. These are things like arrivals, attributes, and resources in the model. This information is the ouptut of the DES model.</p>
 </div>
@@ -664,7 +664,7 @@ window.Quarto = {
 <p>Let’s now add in death as another event.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-model2" data-pan-to="50%,50%" data-scale-by="2.5">
+<div class="trigger new-trigger" data-pan-to="50%,50%" data-scale-by="2.5" data-focus-on="cr-model2">
 <div class="narrative">
 <p>From the healthy state we now have a <span style="color:#00A1D5FF"><strong>transition</strong></span></p>
 </div>
@@ -689,12 +689,12 @@ window.Quarto = {
 <p>Now we need to define a function that specifies <em>what happens</em> when someone dies.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventdeath1b" data-highlight="3-5">
+<div class="trigger new-trigger" data-highlight="3-5" data-focus-on="cr-Reventdeath1b">
 <div class="narrative">
 <p>Once again we use a <strong>branch</strong> with only one option, and set <code>continue=FALSE</code> because we do not want the patient to continue in the model after they die.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventdeath1b" data-highlight="6-8">
+<div class="trigger new-trigger" data-highlight="6-8" data-focus-on="cr-Reventdeath1b">
 <div class="narrative">
 <p>Once the patient dies, we want to record their death time and then terminate the simulation (i.e., release <code>time_in_model</code>, etc.) for that patient.</p>
 </div>
@@ -704,22 +704,22 @@ window.Quarto = {
 <p>Finally, we want our output to record the time of death for each patient who dies. We add death as something we record in the event registry.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg1" data-highlight="8">
+<div class="trigger new-trigger" data-highlight="8" data-focus-on="cr-Reventreg1">
 <div class="narrative">
 <p>Every patient that dies gets an attribute telling us that they died.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg1" data-highlight="9">
+<div class="trigger new-trigger" data-highlight="9" data-focus-on="cr-Reventreg1">
 <div class="narrative">
 <p>The time to this event occurring is defined by the <code>years_to_death()</code> function we just defined earlier.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg1" data-highlight="10">
+<div class="trigger new-trigger" data-highlight="10" data-focus-on="cr-Reventreg1">
 <div class="narrative">
 <p>Similarly, the function that fires at the time of death is the <code>death()</code> function we just finished defining.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-Reventreg1" data-highlight="11">
+<div class="trigger new-trigger" data-highlight="11" data-focus-on="cr-Reventreg1">
 <div class="narrative">
 <p>We set <code>reactive</code> to <code>FALSE</code> because death is a terminal event; we don’t want people to live more than once!</p>
 </div>

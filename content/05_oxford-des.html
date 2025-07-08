@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -123,101 +157,129 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-focus-on="cr-petrisick" data-scale-by="0.8">
-<div class="narrative">
-<p>Our next objective is to build in a single <span style="color:crimson"><strong>sick</strong></span> health state.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petrisick" data-scale-by="2.8" data-pan-to="90%, 50%">
-<div class="narrative">
-<p>Notice that the sick state will allow for disease recovery (i.e., a return to the <span style="color:#6A6599FF"><strong>Healthy</strong></span> state).</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petrisick" data-scale-by="2.8" data-pan-to="90%, 50%">
-<div class="narrative">
-<p>We therefore need to add in two new transitions: (1) becoming ill; and (2) disease recovery.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-inputs2">
-<div class="narrative">
-<p>Let’s now re-define the model inputs.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="6">
-<div class="narrative">
-<p>We include an annual hazard rate of progression from <span style="color:#6A6599FF"><strong>Healthy</strong></span> to <span style="color:#6A6599FF"><strong>Sick</strong></span>.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="7">
-<div class="narrative">
-<p>As well as an annual disease recovery rate.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-inputs2" data-highlight="8">
-<div class="narrative">
-<p>The hazard rate of death from Healthy remains the same.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petri">
+<div class="trigger new-trigger" data-scale-by=".5" data-focus-on="cr-petri">
 <div class="narrative">
 <p>This section of the tutorial will demonstrate how to implement different treatment strategies and summarise outcomes in a DES model.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-focus-on="cr-petri" data-scale-by="1.2">
+<div class="trigger new-trigger" data-scale-by=".5" data-focus-on="cr-petri">
 <div class="narrative">
-<p>We are skipping ahead just a bit to the full <strong>sick-sicker</strong> model shown in the Petri net diagram on the right.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petri">
-<div class="narrative">
-<p>The full model adds in an additional health state <strong>sicker</strong> so we can fully replicate the progressive disease model in</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petri">
-<div class="narrative">
-<p>We added in the <strong>sicker</strong> health state using a similar process as used to add in the <strong>sick</strong> health state earlier.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-petri">
-<div class="narrative">
-<p>The full model code can be found in the file <code>sick-sicker-replication.qmd</code> in the <a href="https://posit.cloud/content/10570508">posit.cloud</a> workspace.</p>
+<p>The table shown here is our ultimate goal—it shows cost and QALY outcomes, as well as incremental cost-effectiveness results, for the four strategies considered in alarid2023introductory.</p>
 </div>
 </div>
 </div>
 <div class="sticky-col">
 <div class="sticky-col-stack">
-<div id="cr-petrisick" class="sticky">
+<div id="cr-petri" class="sticky">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/petri-model4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="images/petri-model5.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
-<div id="cr-petri" class="sticky">
-<p><img src="images/petri-model5.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
-</div>
-<div class="cr-section cr-column-screen sidebar-left">
-<div class="narrative-col">
-<div class="trigger new-trigger" data-focus-on="cr-test">
-<div class="narrative">
-<p>Our ultimate goal is to create the CEA table shown here.</p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-test">
-<div class="narrative">
-<p>To do so, we need to do two things: (1) for a given model run, aggregate and summarise individual patient trajectories into average cost and QALY outcomes; (2) run the model on the alternative different strategies.</p>
-</div>
-</div>
-</div>
-<div class="sticky-col">
-<div class="sticky-col-stack">
-<div id="cr-test" class="sticky">
+<div id="cr-run" class="sticky">
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Standard of Care (no treatments)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>run.SoC <span class="ot">&lt;-</span> <span class="fu">des_run</span>(<span class="fu">modifyList</span>(inputs, <span class="fu">list</span>(<span class="at">treatA =</span> <span class="cn">FALSE</span>, <span class="at">treatB =</span> <span class="cn">FALSE</span>)))</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#- Treatment A</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>run.A <span class="ot">&lt;-</span> <span class="fu">des_run</span>(<span class="fu">modifyList</span>(inputs, <span class="fu">list</span>(<span class="at">treatA =</span> <span class="cn">TRUE</span>, <span class="at">treatB =</span> <span class="cn">FALSE</span>)))</span>
+<span id="cb1-8"><a href="#cb1-8"></a>run.A <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"patient2"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">foo =</span> <span class="sc">!</span><span class="fu">as.integer</span>(resource <span class="sc">==</span> <span class="st">"time_in_model"</span>)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(foo,start_time,end_time) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>foo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code># A tibble: 9 × 10
+  name     start_time end_time activity_time resource  replication   cost  dcost
+  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 patient2       0        4.49         4.49  time_in_…           1     0      0 
+2 patient2       0        2.11         2.11  healthy             1  4220.  4091.
+3 patient2       2.11     2.86         0.751 sick1               1  3004.  2791.
+4 patient2       2.11     2.86         0.751 A                   1  9012.  8373.
+5 patient2       2.86     3.11         0.251 healthy             1   501.   459.
+6 patient2       3.11     3.65         0.538 sick1               1  2151.  1947.
+7 patient2       3.11     4.49         1.37  A                   1 16498. 14747.
+8 patient2       3.65     4.49         0.837 sick2               1 12556. 11134.
+9 patient2       4.49     4.49         0     death               1     0      0 
+# ℹ 2 more variables: qaly &lt;dbl&gt;, dqaly &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#- Treatment B</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>run.B <span class="ot">&lt;-</span>  <span class="fu">des_run</span>(<span class="fu">modifyList</span>(inputs, <span class="fu">list</span>(<span class="at">treatA =</span> <span class="cn">FALSE</span>, <span class="at">treatB =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Treatment A + B</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>run.AB <span class="ot">&lt;-</span> <span class="fu">des_run</span>(<span class="fu">modifyList</span>(inputs, <span class="fu">list</span>(<span class="at">treatA =</span> <span class="cn">TRUE</span>, <span class="at">treatB =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="cr-ceatable" class="sticky">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">Strategy</th>
+<th style="text-align: right;">Cost</th>
+<th style="text-align: right;">Effect</th>
+<th style="text-align: right;">Inc_Cost</th>
+<th style="text-align: right;">Inc_Effect</th>
+<th style="text-align: right;">ICER</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">DES</td>
+<td style="text-align: left;">SoC</td>
+<td style="text-align: right;">158970.2</td>
+<td style="text-align: right;">21.52921</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DES</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">292620.0</td>
+<td style="text-align: right;">22.22509</td>
+<td style="text-align: right;">133649.8</td>
+<td style="text-align: right;">0.6958788</td>
+<td style="text-align: right;">192059.0</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DES</td>
+<td style="text-align: left;">AB</td>
+<td style="text-align: right;">423064.2</td>
+<td style="text-align: right;">22.85101</td>
+<td style="text-align: right;">130444.2</td>
+<td style="text-align: right;">0.6259175</td>
+<td style="text-align: right;">208404.8</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DES</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">290817.6</td>
+<td style="text-align: right;">21.96967</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">Dominatd (Extended)</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
